@@ -43,6 +43,7 @@ import express from 'express'
 // https://flaviocopes.com/fix-dirname-not-defined-es-module-scope/
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { rps } from './lib/rpsls';
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 // Load dependencies for logging
@@ -102,3 +103,106 @@ process.on('SIGINT', () => {
         }    
     })
 })
+
+import { rpsls } from './lib/rpsls';
+import { rps } from './lib/rpsls';
+
+
+app.get("/app/", (req,res,next) => {
+    res.status(200)
+    .setHeader('Content-type', 'text/plain')
+});
+
+app.get("/app/rps", (req,res,next) => {
+    var result = JSON.stringify(rps())
+    res.status(200)
+    .setHeader('Content-type', 'application/json')
+    .send(result)
+});
+
+app.get("/app/rpsls", (req,res,next) => {
+    var result = JSON.stringify(rpsls())
+    res.status(200)
+    .setHeader('Content-type', 'application/json')
+    .send(result)
+});
+
+app.get("/app/rps/play", (req,res,next) => {
+    let shot = req.query.shot;
+    try {
+        var result = JSON.stringify(rps(shot));
+    } catch{
+        result = `${shot} is out of range.`;
+    }
+    res.status(200)
+    .setHeader('Content-Type', 'application/json')
+    .send(result);
+});
+
+app.get("/app/rpsls/play", (req,res,next) => {
+    let shot = req.query.shot;
+    try {
+        var result = JSON.stringify(rpsls(shot));
+    } catch{
+        result = `${shot} is out of range.`;
+    }
+    res.status(200)
+    .setHeader('Content-Type', 'application/json')
+    .send(result);
+});
+
+app.post("/app/rps/play", express.json(), (req,res,next) => {
+    let shot = req.body.shot;
+    try {
+        var result = JSON.stringify(rps(shot));
+    } catch{
+        result = `${shot} is out of range.`;
+    }
+    res.status(200)
+    .setHeader('Content-Type', 'application/json')
+    .send(result);
+});
+
+app.post("/app/rpsls/play", (req,res,next) => {
+    let shot = req.body.shot;
+    try {
+        var result = JSON.stringify(rpsls(shot));
+    } catch{
+        result = `${shot} is out of range.`;
+    }
+    res.status(200)
+    .setHeader('Content-Type', 'application/json')
+    .send(result);
+});
+
+app.get("/app/rps/play/:shot", (req,res,next) => {
+    let shot = req.params.shot;
+    try {
+        var result = JSON.stringify(rps(shot));
+    } catch{
+        result = `${shot} is out of range.`;
+    }
+    res.status(200)
+    .setHeader('Content-Type', 'text/plain')
+    .send(result);
+});
+
+app.get("/app/rpsls/play/:shot", (req,res,next) => {
+    let shot = req.params.shot;
+    try {
+        var result = JSON.stringify(rpsls(shot));
+    } catch{
+        result = `${shot} is out of range.`;
+    }
+    res.status(200)
+    .setHeader('Content-Type', 'application/json')
+    .send(result);
+});
+
+
+app.use(function(req,res){
+    res.json({"message": "404 NOT FOUND"});
+    res.status(404)
+    .setHeader('Content-type', 'text/plain')
+    .send('404 Not Found!')
+});
