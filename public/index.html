@@ -1,10 +1,32 @@
 <html>
     <head>
-        <title>Rock</title>
-        <!-- Link to your script file(s) and CSS in here somewhere -->
+        <meta charset="utf-8">
+        <title>Rock, Paper, Scissors!</title>
+        <link href = "./styles.css" rel = "stylesheet">
+        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src = "./scripts.js"></script>
     </head>
-    <body>
-
+    <body onload() = "shotView()">
+        <form id= "gameplay">
+            <input type = "radio" id = "rps" name = "gameStyle" checked = "checked" (onclick) = "shotView()"> Play Rock Paper Scissors
+            <br><br>
+            <input type = "radio" id = "rpsls" name = "gameStyle" (onclick) = "shotView()"> Play Rock Paper Scissors Lizard Spock
+            <br><br>
+            <input type = "checkbox" id = "opponent" name = "playStyle" (onclick) = "shotView()"> Play against an opponent?
+            <br><br>
+            <input type = radio id = "rock" value = "rock" class = "rps-shot" checked = "checked">
+            <label class = "shot-rps" >Rock</label>
+            <input type = radio id = "paper" value = "paper" class = "rps-shot" >
+            <label class = "shot-rps" >Paper</label>
+            <input type = radio id = "scissors" value = "scissors" class = "rps-shot">
+            <label class = "shot-rps" >Scissors</label>
+            <input type = radio id = "lizard" value = "lizard" class = "rpsls-shot" >
+            <label class = "shot-rpsls">Lizard</label>
+            <input type = radio id = "spock" value = "spock" class = "rpsls-shot">
+            <label class = "shot-rpsls">Spock</label>
+            <br><br>
+            <input type = submit id = "play">
+        </form>
     <!-- Your interface markup goes here -->
     <!-- For interface examples, look in the `/examples/` directory in the root of your starter code repo. -->
 
