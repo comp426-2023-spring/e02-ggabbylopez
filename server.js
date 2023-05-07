@@ -43,7 +43,6 @@ import express from 'express'
 // https://flaviocopes.com/fix-dirname-not-defined-es-module-scope/
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { rps } from './lib/rpsls.js';
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 // Load dependencies for logging
@@ -105,9 +104,9 @@ process.on('SIGINT', () => {
 })
 
 import { rpsls } from './lib/rpsls.js';
+import { rps } from './lib/rpsls.js'
 
-
-app.get("/app/", (req,res) => {
+app.get("/app", (req,res, next) => {
     res.status(200)
     .setHeader('Content-type', 'text/plain')
 });
@@ -186,7 +185,7 @@ app.get("/app/rps/play/:shot", (req,res) => {
     .send(result);
 });
 
-app.get("/app/rpsls/play/:shot", (req,res,next) => {
+app.get("/app/rpsls/play/:shot", (req,res) => {
     let shot = req.params.shot;
     try {
         var result = JSON.stringify(rpsls(shot));
