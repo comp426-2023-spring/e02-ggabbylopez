@@ -50,9 +50,6 @@ async function playGame(){
     try {
     let game = $('input[type=radio][name=gameStyle]:checked').val();
     let shot = $('input[type=radio][name=shot]:checked').val();
-    let baseurl = window.location.href + '/app/';
-    console.log(baseurl);
-    console.log(game);
     let url = '/app/'+ game + '/play/';
     
     if($('#opponent').is(':checked')){

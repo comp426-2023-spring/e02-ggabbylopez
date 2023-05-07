@@ -106,9 +106,8 @@ process.on('SIGINT', () => {
 import { rpsls } from './lib/rpsls.js';
 import { rps } from './lib/rpsls.js'
 
-app.get("/app", (req,res, next) => {
-    res.status(200)
-    .setHeader('Content-type', 'text/plain')
+app.get("/app/", (req,res) => {
+    res.status(200).send("200 OK");
 });
 
 app.get("/app/rps/", (req,res) => {
