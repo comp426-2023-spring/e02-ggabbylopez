@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang = "en">
+<html>
     <head>
         <meta charset="utf-8">
         <title>Rock, Paper, Scissors</title>
@@ -7,20 +6,20 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src = "./scripts.js"></script>
     </head>
-    <body onload="showRules(0);showRules()">
+    <body onload="resetPage()">
         <h1>Rock, Paper, Scissors... and More!</h1>
         <form id= "gameplay">
-            <input type = "radio" id = "rps" name = "gameStyle" onclick = "shotView()"> Play Rock Paper Scissors
+            <input type = "radio" id = "rps" name = "gameStyle" value="rps"  check="checked" onclick = "shotView()"> Play Rock Paper Scissors
             <br><br>
-            <input type = "radio" id = "rpsls" name = "gameStyle" checked = "checked" onclick = "shotView()"> Play Rock Paper Scissors Lizard Spock
+            <input type = "radio" id = "rpsls" name = "gameStyle" value="rpsls" onclick = "shotView()"> Play Rock Paper Scissors Lizard Spock
             <br><br>
             Play with an opponent?
-            <input type = "checkbox" id = "opponent" name = "playStyle" checked = "checked" onclick = "shotView()">
+            <input type = "checkbox" id = "opponent" name = "playStyle" check="checked" onclick = "shotView()">
             <p>
                 If the box above is not checked the both moves will be randomized.
             </p>
             <div class = "moves">
-                    <input type = radio id = "rock" name = "shot" value = "rock" checked = "checked">
+                    <input type = radio id = "rock" name = "shot" value = "rock">
                     <label class = "shot-rps" >Rock</label>
                     <input type = radio id = "paper" name = "shot" value = "paper"  >
                     <label class = "shot-rps" >Paper</label>
@@ -36,12 +35,18 @@
                 <br>
                 <input type = "submit" id = "play">
             </div>
-            <input type = "reset">
+            <button type = "reset" onclick="resetPage()">Start Over</button>
         </form>
     <!-- Your interface markup goes here -->
     <!-- For interface examples, look in the `/examples/` directory in the root of your starter code repo. -->
+    <button type="button" id="play" onclick="playGame()">Play Game</button>
     <button type="button" id="show" onclick="showRules(1)">Show Game Rules</button>
     <button type="button" id="hide" onclick="showRules(0)">Hide Game Rules</button>
+    <div class = "results">
+        <h3 class="resultTitle">The Results</h3>
+        <img id="playerImage" alt="player shot" src=".img/rock.jpg">
+        <img id="opponentImage" alt="opponent shot" src=".img/scissors.jpg">
+    </div>
         <div class = "rules">
             <ul>Rules for Rock, Paper, Scissors:
                 <li>Scissors CUTS Paper</li>
@@ -62,6 +67,5 @@
                 <li>Spock VAPORIZES Rock</li>
             </ul>
         </div>
-        <div class = "results">results</div>
     </body>
 </html>

@@ -107,26 +107,26 @@ process.on('SIGINT', () => {
 import { rpsls } from './lib/rpsls.js';
 
 
-app.get("/app/", (req,res,next) => {
+app.get("/app/", (req,res) => {
     res.status(200)
     .setHeader('Content-type', 'text/plain')
 });
 
-app.get("/app/rps", (req,res,next) => {
+app.get("/app/rps/", (req,res) => {
     var result = JSON.stringify(rps())
     res.status(200)
     .setHeader('Content-type', 'application/json')
     .send(result)
 });
 
-app.get("/app/rpsls", (req,res,next) => {
+app.get("/app/rpsls/", (req,res) => {
     var result = JSON.stringify(rpsls())
     res.status(200)
     .setHeader('Content-type', 'application/json')
     .send(result)
 });
 
-app.get("/app/rps/play", (req,res,next) => {
+app.get("/app/rps/play/", (req,res) => {
     let shot = req.query.shot;
     try {
         var result = JSON.stringify(rps(shot));
@@ -138,7 +138,7 @@ app.get("/app/rps/play", (req,res,next) => {
     .send(result);
 });
 
-app.get("/app/rpsls/play", (req,res,next) => {
+app.get("/app/rpsls/play/", (req,res) => {
     let shot = req.query.shot;
     try {
         var result = JSON.stringify(rpsls(shot));
@@ -150,32 +150,8 @@ app.get("/app/rpsls/play", (req,res,next) => {
     .send(result);
 });
 
-app.post("/app/rps/play", express.json(), (req,res,next) => {
+app.post("/app/rps/play/", (req,res) => {
     let shot = req.body.shot;
-    try {
-        var result = JSON.stringify(rps(shot));
-    } catch{
-        result = `${shot} is out of range.`;
-    }
-    res.status(200)
-    .setHeader('Content-Type', 'application/json')
-    .send(result);
-});
-
-app.post("/app/rpsls/play", (req,res,next) => {
-    let shot = req.body.shot;
-    try {
-        var result = JSON.stringify(rpsls(shot));
-    } catch{
-        result = `${shot} is out of range.`;
-    }
-    res.status(200)
-    .setHeader('Content-Type', 'application/json')
-    .send(result);
-});
-
-app.get("/app/rps/play/:shot", (req,res,next) => {
-    let shot = req.params.shot;
     try {
         var result = JSON.stringify(rps(shot));
     } catch{
@@ -183,6 +159,30 @@ app.get("/app/rps/play/:shot", (req,res,next) => {
     }
     res.status(200)
     .setHeader('Content-Type', 'text/plain')
+    .send(result);
+});
+
+app.post("/app/rpsls/play/", (req,res) => {
+    let shot = req.body.shot;
+    try {
+        var result = JSON.stringify(rpsls(shot));
+    } catch{
+        result = `${shot} is out of range.`;
+    }
+    res.status(200)
+    .setHeader('Content-Type', 'application/json')
+    .send(result);
+});
+
+app.get("/app/rps/play/:shot", (req,res) => {
+    let shot = req.params.shot;
+    try {
+        var result = JSON.stringify(rps(shot));
+    } catch{
+        result = `${shot} is out of range.`;
+    }
+    res.status(200)
+    .setHeader('Content-Type', 'application/json')
     .send(result);
 });
 
@@ -199,9 +199,7 @@ app.get("/app/rpsls/play/:shot", (req,res,next) => {
 });
 
 
-app.use(function(req,res){
-    res.json({"message": "404 NOT FOUND"});
+app.get("app/*", req,res => {
     res.status(404)
-    .setHeader('Content-type', 'text/plain')
-    .send('404 Not Found!')
+    .send('404: Not Found!');
 });
