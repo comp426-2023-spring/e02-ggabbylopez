@@ -13,9 +13,9 @@
             <h3>Which game would you like to play?
                 *Click "Show Game Rules" for more info*
             </h3>
-            <input type="radio" id="rps" class="choices" name="gameStyle" value="rps" checked="checked" onclick="shotView()"> Play Rock Paper Scissors
+            <input type="radio" id="rps" class="choices" name="gameStyle" value="rps" onclick="shotView()" checked> Play Rock Paper Scissors
             <br><br>
-            <input type="radio" id="rpsls"  class="choices" name="gameStyle" value="rpsls" onclick ="shotView()"> Play Rock Paper Scissors Lizard Spock
+            <input type="radio" id="rpsls" class="choices" name="gameStyle" value="rpsls" onclick="shotView()"> Play Rock Paper Scissors Lizard Spock
             <h3>
                 Play with an opponent?
             <input type="checkbox" id="opponent"  class="choices" name="playStyle" onclick="shotView()">
@@ -25,7 +25,7 @@
             </p>
         </div>
             <div class="moves">
-                    <input type="radio" id="rock" name="shot" checked="checked" value="rock">
+                    <input type="radio" id="rock" name="shot" value="rock" checked>
                     <label class="shot-rps" >Rock</label>
                     <img id="rockimg" alt="rock" src="img/rock.jpg">
                     <br>
@@ -50,15 +50,11 @@
             <div class="buttons">
                 <button type="submit" id="placeholder" onclick="playGame()">Play Game</button>
                 <button type="button" id="play" onclick="playGame()">Play Game</button>
-                <button type="button" id="startover"onclick="resetPage()">Start Over</button>
+                <button type="button" id="startover" onclick="resetPage()">Start Over</button>
                 <button type="button" id="show" onclick="showRules(1)">Show Game Rules</button>
                 <button type="button" id="hide" onclick="showRules(0)">Hide Game Rules</button>
             </div>
         </form>
-        
-    <!-- Your interface markup goes here -->
-    <!-- For interface examples, look in the `/examples/` directory in the root of your starter code repo. -->
-    
     <div class="results">
         <h3 class="resultTitle">The Results</h3>
         <p class="resultText"></p>
