@@ -23,12 +23,14 @@ function shotView(){
 
 function showResults(){
     $('.results').show();
-    $('.moves').css('visibility', 'hidden');
-    $('.choices').attr('disabled',true);
+    $('input').attr('disabled',true);
+    $('#play').attr('disabled',true);
 
 }
 function hideResults(){
     $('.results').hide();
+    $('#play').attr('disabled',false);
+
 }
 function showRules(r){
     if (r == 1){
@@ -56,11 +58,8 @@ async function playGame(){
         url = url + shot;
     }
    
-    
-    console.log(url);
     let response = await fetch(url);
     let result = await response.json();
-    console.log(result);
 
     let str = "";
     let title = "";
@@ -79,7 +78,7 @@ async function playGame(){
         }
         $('.resultTitle').text(title);
     } else {
-        str = `player: ${result.player}`;
+        str = `player played ${result.player}.`;
     }
     $('.resultText').text(str);
     showResults();
