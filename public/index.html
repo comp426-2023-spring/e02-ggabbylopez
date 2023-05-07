@@ -1,59 +1,80 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Rock, Paper, Scissors</title>
+        <title>RPS/RPSLS</title>
         <link href="./styles.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="./scripts.js"></script>
     </head>
-    <body onload="resetPage()">
-        <h1>Rock, Paper, Scissors... and More!</h1>
-        <form id="gameplay">
-            <input type="radio" id="rps" name="gameStyle" value="rps" check="checked" onclick="shotView()"> Play Rock Paper Scissors
+    <body onload="resetPage();showRules(0)">
+        <h1>Rock, Paper, Scissors,...Lizard, Spock</h1>
+        <form class="gameplay">
+            <div class="gameStyling">
+            <h3>Which game would you like to play?
+                *Click "Show Game Rules" for more info*
+            </h3>
+            <input type="radio" id="rps" class="choices" name="gameStyle" value="rps" checked="checked" onclick="shotView()"> Play Rock Paper Scissors
             <br><br>
-            <input type="radio" id="rpsls" name="gameStyle" value="rpsls" onclick ="shotView()"> Play Rock Paper Scissors Lizard Spock
-            <br><br>
-            Play with an opponent?
-            <input type="checkbox" id="opponent" name="playStyle" check="checked" onclick="shotView()">
-            <p>
-                If the box above is not checked the both moves will be randomized.
+            <input type="radio" id="rpsls"  class="choices" name="gameStyle" value="rpsls" onclick ="shotView()"> Play Rock Paper Scissors Lizard Spock
+            <h3>
+                Play with an opponent?
+            <input type="checkbox" id="opponent"  class="choices" name="playStyle" onclick="shotView()">
+            </h3>
+            <p class="opponentinfo">
+                If the box above is not checked then when "Play Game" is clicked it will give you a single random move.
             </p>
+        </div>
             <div class="moves">
-                    <input type=radio id="rock" name="shot" value="rock">
-                    <label class="shot-rps" >Rock</label>e
-                    <input type="radio" id="paper" name="shot" value="paper"  >
+                    <input type="radio" id="rock" name="shot" checked="checked" value="rock">
+                    <label class="shot-rps" >Rock</label>
+                    <img id="rockimg" alt="rock" src="img/rock.jpg">
+                    <br>
+                    <input type="radio" id="paper" name="shot" value="paper">
                     <label class="shot-rps" >Paper</label>
+                    <img id="paperimg" alt="paper" src="img/paper.jpg">
+                    <br>
                     <input type="radio" id="scissors" name="shot" value="scissors">
                     <label class="shot-rps" >Scissors</label>
+                    <img id="scissorsimg" alt="scissors" src="img/scissors.jpg">
                 <div class="rpslsmoves">
-                    <input type="radio" id="lizard" name="shot" value="lizard" class="rpsls-shot" >
-                    <label class = "shot-rpsls">Lizard</label>
+                    <input type="radio" id="lizard" name="shot" value="lizard" class="rpsls-shot">
+                    <label class="shot-rpsls">Lizard</label>
+                    <img id="lizardimg" alt="lizard" src="img/lizard.jpg">
+                    <br>
                     <input type="radio" id="spock" name="shot" value="spock" class="rpsls-shot">
                     <label class="shot-rpsls">Spock</label>
+                    <img id="spockimg" alt="spock" src="img/spock.jpg">
                     <br><br>
                 </div>
-                <br>
             </div>
-            <button type="reset" onclick="resetPage()">Start Over</button>
+            <div class="buttons">
+                <button type="submit" id="placeholder" onclick="playGame()">Play Game</button>
+                <button type="button" id="play" onclick="playGame()">Play Game</button>
+                <button type="button" id="startover"onclick="resetPage()">Start Over</button>
+                <button type="button" id="show" onclick="showRules(1)">Show Game Rules</button>
+                <button type="button" id="hide" onclick="showRules(0)">Hide Game Rules</button>
+            </div>
         </form>
+        
     <!-- Your interface markup goes here -->
     <!-- For interface examples, look in the `/examples/` directory in the root of your starter code repo. -->
-    <button type="button" id="play" onclick="playGame()">Play Game</button>
-    <button type="button" id="show" onclick="showRules(1)">Show Game Rules</button>
-    <button type="button" id="hide" onclick="showRules(0)">Hide Game Rules</button>
+    
     <div class="results">
         <h3 class="resultTitle">The Results</h3>
         <p class="resultText"></p>
-        <img id="playerImage" alt="player shot" src=".img/rock.jpg">
-        <img id="opponentImage" alt="opponent shot" src=".img/scissors.jpg">
+        <img id="playerImage" alt="player shot" src="img/rock.jpg">
+        <img id="opponentImage" alt="opponent shot" src="img/scissors.jpg">
     </div>
         <div class="rules">
-            <ul>Rules for Rock, Paper, Scissors:
+            <h2 id="rulesTitle">Game Rules</h2>
+            <ul id="rpsRules">
+            Rules for Rock, Paper, Scissors:
                 <li>Scissors CUTS Paper</li>
                 <li>Paper COVERS Rock</li>
                 <li> Rock CRUSHES Scissors</li>
             </ul>
-            <ul>Rules for the Lizard-Spock Expansion of Rock Paper Scissors:
+            <ul>
+            Rules for the Lizard-Spock Expansion of Rock Paper Scissors:
                 <li>Scissors CUTS Paper</li>
                 <li>Paper COVERS Rock</li>
                 <li> Rock CRUSHES Scissors</li>

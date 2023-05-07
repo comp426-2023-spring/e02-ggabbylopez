@@ -25,11 +25,7 @@
   "dependencies": {
     "express": "^4.18.2",
     "minimist": "^1.2.8",
-    "module": "^1.1.0",
-    "morgan": "^1.10.0",
-    "path": "^0.12.7",
-    "port": "^0.8.1",
-    "url": "^0.11.0"
+    "morgan": "^1.10.0"
   },
   "directories": {
     "example": "examples",

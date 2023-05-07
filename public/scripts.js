@@ -5,43 +5,44 @@
 
 //showing shot options based off whether there is an opponent
 function shotView(){
+    $('.choices').attr('disabled',false);
     let checker = document.getElementById('opponent');
     if (checker.checked == true){
        //if true check which game is chosen
         if($('#rps').is(':checked')){
-            $('.moves').show();
+            $('.moves').css('visibility', 'visible');
             $('.rpslsmoves').hide();
         } else {
-            $('.moves').show();
+            $('.moves').css('visibility', 'visible');
             $('.rpslsmoves').show();
         }
     } else {
-        $('.moves').hide();
+        $('.moves').css('visibility', 'hidden');
     }
 }
 
 function showResults(){
     $('.results').show();
-    $('#gamePlay').hide();
+    $('.moves').css('visibility', 'hidden');
+    $('.choices').attr('disabled',true);
+
 }
 function hideResults(){
     $('.results').hide();
-    $('#gamePlay').show();
 }
 function showRules(r){
     if (r == 1){
-        $('.rules').show();
+        $('.rules').css('visibility', 'visible');
         $('#show').hide();
         $('#hide').show();
     } else {
-        $('.rules').hide();
+        $('.rules').css('visibility', 'hidden');
         $('#show').show();
         $('#hide').hide();
     }
 }
 function resetPage(){
     shotView();
-    showRules(0);
     hideResults();
 
 }
@@ -65,22 +66,28 @@ async function playGame(){
     console.log(result);
 
     let str = "";
+    let title = "";
 
     if($('#opponent').is(':checked')){
-        $('#opponentImage').attr("src", `.img/${result.opponent}.jpg`)
-        $('#playerImage').attr("src", `.img/${result.player}.jpg`)
-        str = `You: ${result.player}
-
-        Your opponent: ${result.opponent}
-
-        Result: ${result.result}`;
+        $('#opponentImage').attr("src", `img/${result.opponent}.jpg`)
+        $('#playerImage').attr("src", `img/${result.player}.jpg`)
+        str = `You played ${result.player} and your opponent played ${result.opponent}.`;
+        if(result.result == "win"){
+            title = "You Won!!";
+        } else if (result.result == "lose") {
+            title = "Aw You Lost :( Maybe next time!";
+        } else {
+            title = "It's a tie! Could be worse.";
+            str =`Both players played ${result.player}.`
+        }
+        $('.resultTitle').text(title);
     } else {
         str = `player: ${result.player}`;
     }
     $('.resultText').text(str);
     showResults();
-    } catch {
-        window.log("uh oh! there seems to be an error");
+    } catch (error){
+        window.alert("Please make sure that you've chosen which game you want to play and if available select your move.");
     }
 
 }
