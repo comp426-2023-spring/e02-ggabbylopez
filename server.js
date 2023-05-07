@@ -103,7 +103,6 @@ process.on('SIGINT', () => {
         }    
     })
 })
-
 import { rpsls } from './lib/rpsls.js';
 
 
@@ -199,7 +198,7 @@ app.get("/app/rpsls/play/:shot", (req,res,next) => {
 });
 
 
-app.get("app/*", req,res => {
+app.get("app/*", (req,res) => {
     res.status(404)
     .send('404: Not Found!');
 });

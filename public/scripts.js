@@ -18,7 +18,6 @@ function shotView(){
     } else {
         $('.moves').hide();
     }
-    $('#play').hide();
 }
 
 function showResults(){
@@ -78,7 +77,7 @@ async function playGame(){
     } else {
         str = `player: ${result.player}`;
     }
-    $('.results').text(str);
+    $('.resultText').text(str);
     showResults();
     } catch {
         window.log("uh oh! there seems to be an error");
