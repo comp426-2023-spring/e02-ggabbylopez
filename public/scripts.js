@@ -6,6 +6,7 @@
 //showing shot options based off whether there is an opponent
 function shotView(){
     $('.choices').attr('disabled',false);
+    $('.moves').attr('disabled',false);
     let checker = document.getElementById('opponent');
     if (checker.checked == true){
        //if true check which game is chosen
